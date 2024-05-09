@@ -97,7 +97,7 @@ public class playerMovementScript : MonoBehaviour
 
     private void MovePlayer()
     {
-        //Character will always walk in the direction the player is looking
+
         moveDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         if (onGround) 

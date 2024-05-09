@@ -4,24 +4,20 @@ using UnityEngine;
 
 public class EnemyHealth : MonoBehaviour
 {
-    // Start is called before the first frame update
 
     public float health = 100f;
-    GameObject toKill;
 
-    public void TakeDamage (float amount)
+    public void TakeDamage (float damageAmount)
     {
-        toKill = this.gameObject;
-        health -= amount;
+        health -= damageAmount;
         if (health <= 0)
         {
             Die();
         }
-        Debug.Log(gameObject);
     }
 
     void Die ()
     {
-        Destroy(toKill);
+        Destroy(gameObject);
     }
 }

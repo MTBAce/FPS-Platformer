@@ -749,7 +749,7 @@ MonoBehaviour:
   playerHeight: 2
   Ground:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 128
   onGround: 0
   orientation: {fileID: 1158836522}
 --- !u!54 &996809058
@@ -859,7 +859,7 @@ GameObject:
   - component: {fileID: 1046576724}
   - component: {fileID: 1046576723}
   - component: {fileID: 1046576722}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}

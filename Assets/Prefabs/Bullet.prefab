@@ -119,8 +119,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b772b59ad942540469bdd2d07fa1f739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHealth: {fileID: 4507165385060572914, guid: 58734fe2830077c46b302074c1c56f22, type: 3}
-  life: 1
+  life: 8
 --- !u!54 &9038465790584224750
 Rigidbody:
   m_ObjectHideFlags: 0

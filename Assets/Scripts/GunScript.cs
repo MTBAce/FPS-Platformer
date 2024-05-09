@@ -15,13 +15,13 @@ public class NewGunScript : MonoBehaviour
     {
       if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation);
-            bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletspeed;
+            var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation); //Spawnar skotten på FirePoint objektet
+            bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletspeed; //Ger skotten hastighet
         }
 
       if (Input .GetKey(KeyCode.Mouse1))
         {
-            timeController.DoSlowMotion();
+            timeController.DoSlowMotion(); //Kallar på Slowmotion funktionen, som saktar ner tiden
         }
 
     }

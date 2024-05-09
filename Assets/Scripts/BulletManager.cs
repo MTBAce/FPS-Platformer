@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class BulletManager : MonoBehaviour
 {
-
-
     public float life = 1;
 
     private void Awake()
