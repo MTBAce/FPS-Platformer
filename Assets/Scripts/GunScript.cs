@@ -6,24 +6,90 @@ using UnityEngine;
 public class NewGunScript : MonoBehaviour
 {
     public GameObject bulletPrefab;
-    public float bulletspeed;  
+    public float bulletspeed;
+    
+    public bool isShooting, readyToShoot;
+    bool allowReset = true;
+    public float shootingDelay = 2f;
+    public GameObject firePoint;
 
     public timeController timeController;
 
-    // Update is called once per frame
-  public  void Update ()
+    public GameObject muzzleEffect;
+
+    private Animator animator;
+
+
+    public enum ShootingMode 
     {
-      if (Input.GetKeyDown(KeyCode.Mouse0))
+        Single,
+        Auto,
+    }
+
+    public ShootingMode currentShootingMode;
+
+    private void Awake()
+    {
+        readyToShoot = true;
+        animator = GetComponent<Animator>();
+        
+    }
+
+    public  void Update ()
+    {
+        //Håller in vänsterklick
+        if(currentShootingMode == ShootingMode.Single)
         {
-            var bullet = Instantiate(bulletPrefab, transform.position, transform.rotation); //Spawnar skotten på FirePoint objektet
-            bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletspeed; //Ger skotten hastighet
+            isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
+        //Trycker vänsterklick
+        else if (currentShootingMode == ShootingMode.Auto)
+        {
+            isShooting = Input.GetKey(KeyCode.Mouse0);
+        }
+
+        if (readyToShoot && isShooting)
+        {
+            FireWeapon();
+        }
+
 
       if (Input .GetKey(KeyCode.Mouse1))
         {
-            timeController.DoSlowMotion(); //Kallar på Slowmotion funktionen, som saktar ner tiden
+            SlowMotion();
         }
 
     }
 
+    void FireWeapon()
+    {
+        readyToShoot = false;
+
+        muzzleEffect.GetComponent<ParticleSystem>().Play();
+        animator.SetTrigger("RECOIL");
+
+        var bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation); //Spawnar skotten på FirePoint objektet
+        bullet.GetComponent<Rigidbody>().velocity = firePoint.transform.forward * bulletspeed; //Ger skotten hastighet
+
+      
+
+        if(allowReset)
+        {
+            Invoke("ResetShot", shootingDelay);
+            allowReset = false;
+        }
+    }
+
+
+
+    public void ResetShot()
+    {
+        readyToShoot = true;
+        allowReset = true;
+
+    }
+    void SlowMotion()
+    {
+        timeController.DoSlowMotion(); //Kallar på Slowmotion funktionen, som saktar ner tiden
+    }
 }
