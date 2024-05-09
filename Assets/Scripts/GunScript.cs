@@ -38,27 +38,24 @@ public class NewGunScript : MonoBehaviour
     public  void Update ()
     {
         //Håller in vänsterklick
-        if(currentShootingMode == ShootingMode.Single)
+      if(currentShootingMode == ShootingMode.Single)
         {
             isShooting = Input.GetKeyDown(KeyCode.Mouse0);
         }
         //Trycker vänsterklick
-        else if (currentShootingMode == ShootingMode.Auto)
+      else if (currentShootingMode == ShootingMode.Auto)
         {
             isShooting = Input.GetKey(KeyCode.Mouse0);
         }
 
-        if (readyToShoot && isShooting)
+    if (readyToShoot && isShooting)
         {
             FireWeapon();
         }
-
-
       if (Input .GetKey(KeyCode.Mouse1))
         {
             SlowMotion();
         }
-
     }
 
     void FireWeapon()
@@ -68,11 +65,10 @@ public class NewGunScript : MonoBehaviour
         muzzleEffect.GetComponent<ParticleSystem>().Play();
         animator.SetTrigger("RECOIL");
 
+        SoundManager.instance.m4ShootingSound.Play();
+
         var bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation); //Spawnar skotten på FirePoint objektet
         bullet.GetComponent<Rigidbody>().velocity = firePoint.transform.forward * bulletspeed; //Ger skotten hastighet
-
-      
-
         if(allowReset)
         {
             Invoke("ResetShot", shootingDelay);
@@ -80,13 +76,10 @@ public class NewGunScript : MonoBehaviour
         }
     }
 
-
-
     public void ResetShot()
     {
         readyToShoot = true;
         allowReset = true;
-
     }
     void SlowMotion()
     {
